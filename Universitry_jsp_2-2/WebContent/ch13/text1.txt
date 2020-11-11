@@ -1,0 +1,3 @@
+national=대한민국
+language=한국어
+job=웹프로그래머

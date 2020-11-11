@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.ch19.dao.BbsDAO">
+<resultMap type="com.spring.ch19.vo.BbsVO" id="bbsVO">
+<result property="bid"      column="B_ID" />
+<result property="bname"    column="B_NAME" />
+<result property="bpwd"     column="B_PWD" />
+<result property="bemail"   column="B_EMAIL" />
+<result property="btitle"   column="B_TITLE" />
+<result property="bcontent" column="B_CONTENT" />
+<result property="bhit"     column="B_HIT" />
+<result property="bref"     column="B_REF" />
+<result property="bstep"    column="B_STEP" />
+<result property="border"   column="B_ORDER" />
+</resultMap>
+
+<!-- 게시물 목록 조회 -->
+<select id="listBoard" parameterType="com.spring.ch19.vo.BbsVO" resultMap="bbsVO">
+/* BoardDAO - listBoard */
+SELECT *
+FROM ( SELECT ROWNUM rnum, a.*
+       FROM ( 
+             SELECT B_Id, B_Name, B_Email, B_Title, B_Hit, B_Ref, 
+                    TO_CHAR(B_Date, 'YYYY-MM-DD') as bdate
+             FROM   BOARD
+             WHERE  1=1
+             <if test="btitle != null and btitle != ''">
+                  AND  B_TITLE LIKE '%' || #{btitle} || '%'
+             </if>
+            <if test="bcontent != null and bcontent != ''">
+                  AND  B_CONTENT LIKE '%' || #{bcontent} || '%'
+            </if>
+            ORDER BY B_REF DESC, B_ORDER 
+     ) a
+      WHERE ROWNUM &lt;= #{currPage} * #{pageSize})
+WHERE rnum &gt; (#{currPage}-1)* #{pageSize}
+</select>
+
+<!-- 게시물 전체 행 조회 -->
+<select id="selectBoardCnt" parameterType="com.spring.ch19.vo.BbsVO" resultType="int">
+      SELECT COUNT(*)  FROM   BOARD
+</select>
+
+<!-- 게시물  조회 -->
+<select id="selectBoard" parameterType="com.spring.ch19.vo.BbsVO" resultMap="bbsVO">
+/* BoardDAO - selectBoard */
+SELECT B_Id, B_Name, B_Pwd,  B_Email, B_Title, B_Content, B_Ref, 
+       B_Step, B_Order, TO_CHAR(B_Date, 'YYYY-MM-DD') as bdate
+FROM  BOARD
+WHERE B_ID = #{bid}
+</select>
+
+<!-- 게시물  등록 -->
+<insert id="insertBoard" parameterType="com.spring.ch19.vo.BbsVO" >
+<selectKey keyProperty="bref" resultType="int" order="BEFORE">
+      SELECT NVL(MAX(B_Ref) + 1, 1) as bref
+      FROM   BOARD
+</selectKey>
+/* BoardDAO - insertBoard */
+INSERT INTO BOARD 
+  (b_id, b_name, b_email, b_title, b_content, 
+   b_date, b_hit, b_ref, b_step, b_order)
+VALUES
+  (bbsid.nextval, #{bname}, #{bemail}, #{btitle}, #{bcontent},
+   SYSDATE, 0, #{bref}, 0, 0)
+ </insert>
+
+ <!-- 게시물 답변 등록 -->
+ <insert id="replyBoard" parameterType="com.spring.ch19.vo.BbsVO" >
+/* BoardDAO - replyBoard */
+INSERT INTO BOARD
+   (B_Id,   B_Name, B_Email, B_Title, B_Content,
+    B_Date, B_Hit,  B_Ref,   B_Step,  B_Order )
+VALUES
+  (bbsid.nextval,#{bname},#{bemail},'[답변]' || #{btitle}, 
+   #{bcontent}, SYSDATE,0, #{bref},#{bstep}+1,#{border}+1 )
+ </insert>
+
+<!-- 게시물  수정 -->
+<update id="updateBoard" parameterType="com.spring.ch19.vo.BbsVO" >
+UPDATE BOARD
+SET    B_Name  = #{bname},  B_Email   = #{bemail},
+       B_Title = #{btitle}, B_Content = #{bcontent},
+       B_Date  = Sysdate 
+WHERE  B_ID    = #{bid}
+</update>
+
+<!-- 게시물  삭제 -->
+<delete id="deleteBoard" parameterType="com.spring.ch19.vo.BbsVO" >
+/* BoardDAO - deleteBoard */
+DELETE FROM BOARD WHERE  B_ID   = #{bid}
+</delete>
+
+<!-- 게시물  조회수 증가 -->
+<update id="addHitCount" parameterType="com.spring.ch19.vo.BbsVO" >
+UPDATE BOARD
+SET    B_Hit  = B_Hit +1
+WHERE  B_ID = #{bid} 
+</update>
+
+<!-- 동일그룹 게시물  순서 정렬 -->
+<update id="addReplyOrder" parameterType="com.spring.ch19.vo.BbsVO" >
+UPDATE BOARD
+SET    B_Order  = B_Order +1
+WHERE  B_Ref = #{bref} AND B_Order > #{border} 
+</update>
+</mapper>
