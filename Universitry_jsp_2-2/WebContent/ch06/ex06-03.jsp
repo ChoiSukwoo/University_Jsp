@@ -13,7 +13,7 @@
 			<input type="radio" name = sex value ="남자" checked>남자
 			<input type="radio" name = sex value ="여자" >여자<br>
 		1.좋아하는 과목을 선택하시오.[Checkbox 버튼]<br>
-			<input type="checkbox" name = subj value ="SQL응용" checked>SQL응용<br>
+			<input type="CheckBox" name = subj value ="SQL응용" checked>SQL응용<br>
 			<input type="checkbox" name = subj value ="DB개발도구" >DB개발도구<br>
 			<input type="checkbox" name = subj value ="JSP" checked>JSP<br>
 			<input type="checkbox" name = subj value ="오라클실무" >오라클실무<br>

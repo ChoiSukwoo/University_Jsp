@@ -9,7 +9,7 @@
 학과명: ${dept} <br>
 과목명: ${subj}<p>
 <c:forTokens var="i" items="${dept}" delims="/" varStatus="vs" >
-     <c:out value="${vs.count}. ${i}"/><br>
+     ${vs.count}. ${i}<br>
 </c:forTokens>
 <hr/>
 <c:forTokens var="name" items="${subj}" delims=",/" varStatus="vs">
