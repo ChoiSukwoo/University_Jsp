@@ -1,16 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 
+
+
+
 <sql:setDataSource
-        url="jdbc:oracle:thin:@220.67.2.3:1521:ora11"
-        driver="oracle.jdbc.driver.OracleDriver"
-        user="stud140"
-        password="pass140"
+   		url = "jdbc:oracle:thin:@oracle12.cwdeh862c8nr.ap-northeast-2.rds.amazonaws.com:15211:ORCL"
+        driver="oracle.jdbc.driver.OracleDriver" 
+        user="y1705099"
+        password="pass1705099"
         var="ds1"
         scope="page" />
-
+        
 <sql:query var="rs" dataSource="${ds1}" >
      select course_id, title, c_number, nvl(course_fees,0) "fee" 
      from   course

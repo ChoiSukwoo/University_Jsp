@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<!-- insert.jsp -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!-- core와 sql function을 사용한다고 선언 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <% request.setCharacterEncoding("UTF-8"); %>
 
+<!-- 주민든록앞뒤와 전화번호 각 자리를 매개변수로 가져와서 합치기  -->
 <c:set var="s1" value="${param.ssn1}-${param.ssn2}" />
 <c:set var="t1" value="${param.tel1}-${param.tel2}-${param.tel3}" />
 
@@ -19,7 +20,9 @@
    <c:set var="mpwd" value="${rs.m_pwd}" />
 </c:forEach>
 
-<c:choose>
+	<!-- sql에서 m_uid값이 존재할경우 이미 같은 아이디가 있음으로 회원가입 실패 -->
+    <!-- sql에서 m_uid값이 없을경우 회원가입성공 -->
+<c:choose>	
    <c:when test="${not empty muid}"> 
       <c:url value="img/warning.gif" var="img1"/>
       <img src="${img1}" width="100" height="100">

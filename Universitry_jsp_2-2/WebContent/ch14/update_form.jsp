@@ -1,14 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- 코어와 sql 사용 선언 -->
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 
 <c:set var="id" value="${uid}" scope="session"/>
+<!-- id값이 null이면 로그인 페이지로 이동 -->
 <c:if test="${id == null}"><c:redirect url="login.jsp" /></c:if>
+<!-- sql구문 완성  -->
 <sql:query var="rs1" dataSource="jdbc/OracleDB">
      select * from member where m_uid=?
      <sql:param value="${id}" />
 </sql:query>
+<!-- 회원정보 가져오기 -->
 <c:forEach items="${rs1.rows}" var="rs" >	
      <c:set var="m_uid"    value="${rs.m_uid}" />
      <c:set var="m_pwd"    value="${rs.m_pwd}" />

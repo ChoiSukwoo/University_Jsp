@@ -1,41 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" ...
+﻿<!-- insert_from.jsp -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입입력폼</title>
    <link href="m3.css" type=text/css rel=stylesheet>
+   <!-- 무결성 검사를위한 함수 제작 필수입력값이 전부 작성됫는지 확인 -->
 <script language="JavaScript">
   var msg;
   function form_check() {
      var form = document.form_name;
      msg = "== 가입시 오류 사항 ==\n\n";
-     if(form.name.value=="")
-        msg += "성명을 입력하세요.\n\n";
-     if(form.uid.value=="")
-        msg += "회원ID를 입력하세요.\n\n";
-     else if(form.uid.value.length < 5)
-        msg += "회원ID는 5자 이상 입력해야 합니다.\n\n";
-     else if(!a_or_d(form.uid.value))
-        msg += "회원ID는 영문이나 숫자로 입력하세요.\n\n";
-     if(form.pwd.value=="")
-        msg += "비밀번호를 입력하세요.\n\n";
-     else if(form.pwd.value.length < 5)
-        msg += "비밀번호는 4자 이상 입력해야 합니다.\n\n";
-     else if(!a_or_d(form.pwd.value))
-        msg += "비밀번호는 영문이나 숫자로 입력하세요.\n\n";
-     if(form.pwd.value != form.repwd.value)
-        msg += "비밀번호와 비밀번호 확인 값이 서로 다릅니다.\n\n";
-     if(form.ssn1.value == "")
-        msg += "주민등록번호를 입력하세요.\n\n";
+     if(form.name.value==""){ msg += "성명을 입력하세요.\n\n"; }
+     if(form.uid.value==""){ msg += "회원ID를 입력하세요.\n\n";}
+     else if(form.uid.value.length < 5){ msg += "회원ID는 5자 이상 입력해야 합니다.\n\n";}
+     else if(!a_or_d(form.uid.value)){ msg += "회원ID는 영문이나 숫자로 입력하세요.\n\n";}
+     if(form.pwd.value==""){ msg += "비밀번호를 입력하세요.\n\n";}
+     else if(form.pwd.value.length < 5){ msg += "비밀번호는 4자 이상 입력해야 합니다.\n\n";}
+     else if(!a_or_d(form.pwd.value)){ msg += "비밀번호는 영문이나 숫자로 입력하세요.\n\n";}
+     if(form.pwd.value != form.repwd.value){ msg += "비밀번호와 비밀번호 확인 값이 서로 다릅니다.\n\n";}
+     if(form.ssn1.value == ""){ msg += "주민등록번호를 입력하세요.\n\n";}
 
-     if(msg == "== 가입시 오류 사항 ==\n\n") { 
-        form.submit();
-     } else {
-        alert(msg);
-        return;
-     }
+     if(msg == "== 가입시 오류 사항 ==\n\n") { form.submit();} 
+     else { alert(msg); return; }
    }
 
    function a_or_d(str)  {	// 숫자와 영문 입력 체크
@@ -82,7 +70,7 @@
 <tr>
    <td bgcolor=#ccffff>회원 id<font color=red> *</font></td>
    <td align=absmiddle align=left>
-      <input type=text name=uid size=10 maxlength=15 >
+      <input type=text     name=uid      size=10 maxlength=15 >
       <input type="button" name="id_chk" value="ID중복 체크" OnClick="openuid_check(document.form_name.uid.value)"> 5자 이상의 영문이나 숫자로 입력하세요.</td>
 </tr>
 <tr>
@@ -112,7 +100,7 @@
 <tr>
    <td colspan=3 align=left><font color=red> * </font><font color= black>표시항목은 반드시 입력하십시요.</font>&nbsp;&nbsp;
       <input type="button" name="formcheck" value="가   입" OnClick="form_check()">
-      <input type="reset" value="취  소">
+      <input type="reset"  value="취  소">
    </td>
 </tr>
 </table></form>

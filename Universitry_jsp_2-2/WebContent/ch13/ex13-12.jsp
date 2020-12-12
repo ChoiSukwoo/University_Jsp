@@ -50,6 +50,10 @@
    <td><fmt:formatNumber type="number" 
         pattern="#.###E0" value="${num1}"/></td>
 </tr> 
+	
+	
+	
+</tr>
 </table>
 </body>
 </html>

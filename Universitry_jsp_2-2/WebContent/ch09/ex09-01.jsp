@@ -30,7 +30,7 @@
 				<tr>
 					<td>아이디 : </td>
 					<td><input type = "text" name="id" size = 17></td>
-				</tr>
+				</tr> 
 				<tr>
 					<td>비밀번호 : </td>
 					<td><input type = "password" name="pw" size = 17></td>

@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- 로그아웃 실행 페이지 -->
 <c:set var="id" value="${uid}" scope="session"/>
 <c:choose>
    <c:when test="${id == null}"><c:redirect url="login.jsp" /></c:when>

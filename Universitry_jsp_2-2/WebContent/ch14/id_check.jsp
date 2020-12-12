@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<!-- id_check.jsp  회원가입시 아이디 확인 페이지 -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 
@@ -10,6 +10,7 @@
 <c:forEach var="rs" items="${rs1.rows}">
      <c:set var="id" value="${rs.m_uid}" />
 </c:forEach>
+<!-- sql실행값이 존재한다면 중복된 아이디가 존재 아이디 중복 케이스 출력 -->
 <c:choose>
     <c:when test="${param.uid == id}">${id} 사용불가: 아이디 중복!!!<p> 
       <c:url value="img/warning.gif" var="img1"/>
