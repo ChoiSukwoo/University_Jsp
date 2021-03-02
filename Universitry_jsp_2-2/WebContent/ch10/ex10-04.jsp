@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
 <html>
 <head>
@@ -8,7 +7,7 @@
 </head>
 <body>
   <center><h3>학과정보 입력 화면</h3>
-  <form method=post action="/jspStudy/DeptServlet">
+  <form method=post action="/ch10/DeptServlet">
   <table border="1">
      <tr>
         <td>학과코드</td>

@@ -10,7 +10,7 @@
   <CENTER>
   <H3>가감승제 계산기</H3>
   <HR>
-  <form method=post action=/jspStudy/CalcServlet name=form1>
+  <form method=post action=/ch10/CalcServlet name=form1>
      <input type="text" name="num1" width=200 size="5">
      <select name="operator"> 
          <option selected>+</option>
